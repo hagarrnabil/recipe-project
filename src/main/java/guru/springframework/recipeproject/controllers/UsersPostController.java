@@ -4,10 +4,7 @@ import guru.springframework.recipeproject.models.Unit;
 import guru.springframework.recipeproject.models.Users;
 import guru.springframework.recipeproject.repositories.UnitRepository;
 import guru.springframework.recipeproject.repositories.UsersRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UsersPostController {
@@ -29,4 +26,28 @@ public class UsersPostController {
     Users newUser(@RequestBody Users newUser) {
         return usersrepository.save(newUser);
     }
+
+    @DeleteMapping("/users/{id}")
+    void deleteUser(@PathVariable Integer id) {
+        usersrepository.deleteById(id);
+    }
+
+    @PutMapping("/user/{id}")
+    Users updateUser(@RequestBody Users newUser, @PathVariable Integer id) {
+
+        return usersrepository.findById(id).map(users -> {
+            users.setId(newUser.getId());
+            users.setName(newUser.getName());
+            users.setEmail(newUser.getEmail());
+            users.setPassword(newUser.getPassword());
+            users.setRememberToken(newUser.getRememberToken());
+            users.setCreated_at(newUser.getCreated_at());
+            users.setUpdated_at(newUser.getUpdated_at());
+            return usersrepository.save(newUser);
+        }).orElseGet(() -> {
+            newUser.setId(id);
+            return usersrepository.save(newUser);
+        });
+    }
+
 }

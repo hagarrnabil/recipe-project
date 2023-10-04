@@ -27,7 +27,6 @@ public class Project implements Serializable {
                    Set<Building> buildings) {
         this.projectCode = projectCode;
         this.description = description;
-//        this.validFrom = validFrom;
         this.cCode = cCode;
         this.phase = phase;
         this.buildings = buildings;
@@ -37,6 +36,13 @@ public class Project implements Serializable {
         buildings = null;
     }
 
+    public Integer getProjectCode() {
+        return projectCode;
+    }
+
+    public void setProjectCode(Integer projectCode) {
+        this.projectCode = projectCode;
+    }
 
     public String getDescription() {
         return description;
@@ -60,6 +66,10 @@ public class Project implements Serializable {
 
     public void setPhase(String phase) {
         this.phase = phase;
+    }
+
+    public Set<Building> getBuildings() {
+        return buildings;
     }
 
     @Override

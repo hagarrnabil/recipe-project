@@ -17,7 +17,7 @@ public class Building implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "buildingCode")
-    private long buildingCode;
+    private Integer buildingCode;
     private String description;
     private Integer type;
     private Integer zone;
@@ -53,14 +53,13 @@ public class Building implements Serializable {
         units = null;
     }
 
-    public Long getBuildingCode() {
+    public Integer getBuildingCode() {
         return buildingCode;
     }
 
     public void setBuildingCode(Integer buildingCode) {
         this.buildingCode = buildingCode;
     }
-
 
     public String getDescription() {
         return description;

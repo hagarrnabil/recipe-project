@@ -1,6 +1,7 @@
 package guru.springframework.recipeproject.controllers;
 
 import guru.springframework.recipeproject.models.Building;
+import guru.springframework.recipeproject.models.Users;
 import guru.springframework.recipeproject.repositories.BuildingRepository;
 import guru.springframework.recipeproject.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,29 @@ public class BuildingPostController {
             return buildingrepository.save(building);
         }).orElseThrow(() -> new RuntimeException("PostId " + projectCode + " not found"));
     }
+
+    @DeleteMapping("/buildings/{buildingCode}")
+    void deleteBuilding(@PathVariable Integer buildingCode) {
+        buildingrepository.deleteById(buildingCode);
+    }
+
+    @PutMapping("/projects/{projectCode}/buildings/{buildingCode}")
+    Building updateBuilding(@RequestBody Building newBuilding, @PathVariable Integer buildingCode
+            , @PathVariable Integer projectCode) {
+
+        return projectRepository.findById(projectCode).map(project -> {
+            newBuilding.setProject(project);
+            buildingrepository.save(newBuilding);
+            return buildingrepository.findById(buildingCode).map(building -> {
+                building.setBuildingCode(newBuilding.getBuildingCode());
+                building.setcCode(newBuilding.getcCode());
+                building.setZone(newBuilding.getZone());
+                building.setType(newBuilding.getType());
+                building.setDescription(newBuilding.getDescription());
+                return buildingrepository.save(newBuilding);
+            }).orElseThrow(() -> new RuntimeException("PostId " + buildingCode + " not found"));
+        }).orElseThrow(() -> new RuntimeException("PostId " + projectCode + " not found"));
+    }
+
+
 }

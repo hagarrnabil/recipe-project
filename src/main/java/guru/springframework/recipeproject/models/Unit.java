@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class Unit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long UnitNumber;
+    private Integer UnitNumber;
     private String description;
     private String status;
 
@@ -42,7 +42,7 @@ public class Unit implements Serializable {
     public Unit() {
     }
 
-    public Unit(Integer unitNumber, String description, String status, BigDecimal floor, BigDecimal priceAmount, String priceCurr, BigDecimal size, String unitOfMeasurement, byte[] layoutImage, Timestamp created_at, Timestamp updated_at, Project project, Building building) {
+    public Unit(Integer unitNumber, String description, String status, BigDecimal floor, BigDecimal priceAmount, String priceCurr, BigDecimal size, String unitOfMeasurement, byte[] layoutImage, Timestamp created_at, Timestamp updated_at, Building building) {
         UnitNumber = unitNumber;
         this.description = description;
         this.status = status;
@@ -54,13 +54,12 @@ public class Unit implements Serializable {
         this.layoutImage = layoutImage;
         this.created_at = created_at;
         this.updated_at = updated_at;
-//        this.project = project;
-//        this.building = building;
+        this.building = building;
     }
 
-//    public Integer getUnitNumber() {
-//        return UnitNumber;
-//    }
+    public Integer getUnitNumber() {
+        return UnitNumber;
+    }
 
     public void setUnitNumber(Integer unitNumber) {
         UnitNumber = unitNumber;
@@ -147,13 +146,6 @@ public class Unit implements Serializable {
         this.updated_at = updated_at;
     }
 
-//    public Project getProject() {
-//        return project;
-//    }
-
-//    public void setProject(Project project) {
-//        this.project = project;
-//    }
 
     public Building getBuilding() {
         return building;
