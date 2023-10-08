@@ -6,6 +6,8 @@ import guru.springframework.recipeproject.repositories.UnitRepository;
 import guru.springframework.recipeproject.repositories.UsersRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class UsersPostController {
 
@@ -32,7 +34,7 @@ public class UsersPostController {
         usersrepository.deleteById(id);
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/users/{id}")
     Users updateUser(@RequestBody Users newUser, @PathVariable Integer id) {
 
         return usersrepository.findById(id).map(users -> {

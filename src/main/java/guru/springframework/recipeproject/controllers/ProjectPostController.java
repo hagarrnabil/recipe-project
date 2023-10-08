@@ -33,7 +33,7 @@ public class ProjectPostController {
         projectrepository.deleteById(projectCode);
     }
 
-    @PutMapping("/project/{projectCode}")
+    @PutMapping("/projects/{projectCode}")
     Project updateProject(@RequestBody Project newProject, @PathVariable Integer projectCode) {
 
         return projectrepository.findById(projectCode).map(project -> {

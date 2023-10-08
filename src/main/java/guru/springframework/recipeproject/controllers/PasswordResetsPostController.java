@@ -33,7 +33,7 @@ public class PasswordResetsPostController {
         passwordresets.deleteById(token);
     }
 
-    @PutMapping("/passwordreset/{token}")
+    @PutMapping("/passwordresets/{token}")
     guru.springframework.recipeproject.models.PasswordResets
     updatePasswordreset(@RequestBody guru.springframework.recipeproject.models.PasswordResets newPasswordreset
             , @PathVariable Integer token) {
