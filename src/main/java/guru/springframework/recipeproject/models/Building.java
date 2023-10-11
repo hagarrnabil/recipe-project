@@ -1,6 +1,8 @@
 package guru.springframework.recipeproject.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
@@ -53,6 +55,11 @@ public class Building implements Serializable {
         units = null;
     }
 
+    @JsonManagedReference
+    public Set<Unit> getUnits() {
+        return units;
+    }
+
     public Integer getBuildingCode() {
         return buildingCode;
     }
@@ -92,11 +99,11 @@ public class Building implements Serializable {
     public void setcCode(Integer cCode) {
         this.cCode = cCode;
     }
-
+    @JsonBackReference
     public Project getProject() {
         return project;
     }
-
+    @JsonBackReference
     public void setProject(Project project) {
         this.project = project;
     }

@@ -1,0 +1,22 @@
+apiVersion: gateway.kyma-project.io/v1beta1
+kind: APIRule
+metadata:
+  name: 'recipe'
+  labels: {}
+  annotations: {}
+  namespace: recipe
+spec:
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  host: recipe.c-96e5b5d.kyma.ondemand.com
+  service:
+    name: recipe
+    port: 8080
+  rules:
+    - path: /.*
+      methods:
+        - GET
+        - PUT
+        - POST
+        - DELETE
+      accessStrategies:
+        - handler: allow

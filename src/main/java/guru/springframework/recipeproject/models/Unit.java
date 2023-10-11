@@ -1,8 +1,6 @@
 package guru.springframework.recipeproject.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -15,6 +13,7 @@ import java.util.Arrays;
 
 @Entity
 @Table(name="units")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Unit implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -146,11 +145,11 @@ public class Unit implements Serializable {
         this.updated_at = updated_at;
     }
 
-
+    @JsonBackReference
     public Building getBuilding() {
         return building;
     }
-
+    @JsonBackReference
     public void setBuilding(Building building) {
         this.building = building;
     }

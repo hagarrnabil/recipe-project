@@ -1,9 +1,9 @@
 package guru.springframework.recipeproject.controllers;
 
-import guru.springframework.recipeproject.models.Unit;
 import guru.springframework.recipeproject.models.Users;
-import guru.springframework.recipeproject.repositories.UnitRepository;
 import guru.springframework.recipeproject.repositories.UsersRepository;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -11,7 +11,7 @@ import java.util.Optional;
 @RestController
 public class UsersPostController {
 
-
+    @Autowired
     private final UsersRepository usersrepository;
 
     public UsersPostController(UsersRepository usersrepository) {
@@ -23,6 +23,12 @@ public class UsersPostController {
         return usersrepository.findAll();
     }
 
+
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+    public Optional<Users> findByIds(@PathVariable @NotNull Integer id) {
+
+        return usersrepository.findById(id);
+    }
 
     @PostMapping("/users")
     Users newUser(@RequestBody Users newUser) {

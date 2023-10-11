@@ -36,6 +36,11 @@ public class UnitPostController {
         return unitrepository.findAll();
     }
 
+    @RequestMapping(value = "/units/{UnitNumber}", method = RequestMethod.GET)
+    public Optional<Unit> findByIds(@PathVariable @NotNull Integer UnitNumber) {
+
+        return unitrepository.findById(UnitNumber);
+    }
 
     @PostMapping("/units")
     Unit newUnit(@RequestBody Unit newUnit) {

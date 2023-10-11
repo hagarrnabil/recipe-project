@@ -4,8 +4,11 @@ import guru.springframework.recipeproject.models.Building;
 import guru.springframework.recipeproject.models.Users;
 import guru.springframework.recipeproject.repositories.BuildingRepository;
 import guru.springframework.recipeproject.repositories.ProjectRepository;
+import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class BuildingPostController {
@@ -24,6 +27,12 @@ public class BuildingPostController {
     @GetMapping("/buildings")
     Iterable<Building> all() {
         return buildingrepository.findAll();
+    }
+
+    @RequestMapping(value = "/buildings/{buildingCode}", method = RequestMethod.GET)
+    public Optional<Building> findByIds(@PathVariable @NotNull Integer buildingCode) {
+
+        return buildingrepository.findById(buildingCode);
     }
 
 

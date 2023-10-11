@@ -4,12 +4,16 @@ import guru.springframework.recipeproject.models.Unit;
 import guru.springframework.recipeproject.models.Users;
 import guru.springframework.recipeproject.repositories.PasswordResets;
 import guru.springframework.recipeproject.repositories.UnitRepository;
+import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class PasswordResetsPostController {
 
-
+    @Autowired
     private final PasswordResets passwordresets;
 
     public PasswordResetsPostController(PasswordResets passwordresets) {
@@ -21,6 +25,13 @@ public class PasswordResetsPostController {
         return passwordresets.findAll();
     }
 
+
+    @RequestMapping(value = "/passwordresets/{token}", method = RequestMethod.GET)
+    public Optional<guru.springframework.recipeproject.models.PasswordResets>
+    findByIds(@PathVariable @NotNull Integer token) {
+
+        return passwordresets.findById(token);
+    }
 
     @PostMapping("/passwordresets")
     guru.springframework.recipeproject.models.PasswordResets newPasswordResets(@RequestBody guru.springframework.recipeproject.models.PasswordResets

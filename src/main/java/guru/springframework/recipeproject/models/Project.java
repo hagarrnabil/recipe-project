@@ -1,5 +1,6 @@
 package guru.springframework.recipeproject.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -67,7 +68,7 @@ public class Project implements Serializable {
     public void setPhase(String phase) {
         this.phase = phase;
     }
-
+    @JsonManagedReference
     public Set<Building> getBuildings() {
         return buildings;
     }
