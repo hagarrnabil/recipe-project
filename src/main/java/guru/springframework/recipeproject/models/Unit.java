@@ -26,7 +26,7 @@ public class Unit implements Serializable {
     private String priceCurr;
     private BigDecimal size;
     private String unitOfMeasurement;
-    private byte[] layoutImage;
+    private String layoutImage;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp created_at;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -41,7 +41,7 @@ public class Unit implements Serializable {
     public Unit() {
     }
 
-    public Unit(Integer unitNumber, String description, String status, BigDecimal floor, BigDecimal priceAmount, String priceCurr, BigDecimal size, String unitOfMeasurement, byte[] layoutImage, Timestamp created_at, Timestamp updated_at, Building building) {
+    public Unit(Integer unitNumber, String description, String status, BigDecimal floor, BigDecimal priceAmount, String priceCurr, BigDecimal size, String unitOfMeasurement, String layoutImage, Timestamp created_at, Timestamp updated_at, Building building) {
         UnitNumber = unitNumber;
         this.description = description;
         this.status = status;
@@ -121,11 +121,11 @@ public class Unit implements Serializable {
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public byte[] getLayoutImage() {
+    public String getLayoutImage() {
         return layoutImage;
     }
 
-    public void setLayoutImage(byte[] layoutImage) {
+    public void setLayoutImage(String layoutImage) {
         this.layoutImage = layoutImage;
     }
 
@@ -157,7 +157,7 @@ public class Unit implements Serializable {
     @Override
     public String toString() {
         return "Unit{" +
-                "UnitNumber='" + UnitNumber + '\'' +
+                "UnitNumber=" + UnitNumber +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
                 ", floor=" + floor +
@@ -165,10 +165,9 @@ public class Unit implements Serializable {
                 ", priceCurr='" + priceCurr + '\'' +
                 ", size=" + size +
                 ", unitOfMeasurement='" + unitOfMeasurement + '\'' +
-                ", layoutImage=" + Arrays.toString(layoutImage) +
+                ", layoutImage='" + layoutImage + '\'' +
                 ", created_at=" + created_at +
                 ", updated_at=" + updated_at +
-//                ", project=" + project +
                 ", building=" + building +
                 '}';
     }
